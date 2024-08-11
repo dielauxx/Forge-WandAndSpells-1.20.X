@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wandandspellsmod:item/spark_bolt",
+    "layer1": "wandandspellsmod:item/projectile_frame"
+  }
+}

@@ -1,6 +1,10 @@
 package net.dielauxx.wandandspellsmod;
 
 import com.mojang.logging.LogUtils;
+import net.dielauxx.wandandspellsmod.item.ModCreativeModeTabs;
+import net.dielauxx.wandandspellsmod.item.ModItems;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -26,6 +30,9 @@ public class WandAndSpellsMod
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -43,6 +50,10 @@ public class WandAndSpellsMod
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
+        if(event.getTabKey() == CreativeModeTabs.COMBAT) {
+            event.accept(ModItems.SPARK_BOLT);
+            event.accept(ModItems.WAND);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

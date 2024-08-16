@@ -1,9 +1,12 @@
 package net.dielauxx.wandandspellsmod;
 
 import com.mojang.logging.LogUtils;
+import net.dielauxx.wandandspellsmod.entity.ModEntities;
+import net.dielauxx.wandandspellsmod.entity.client.render.SparkBoltRenderer;
 import net.dielauxx.wandandspellsmod.item.ModCreativeModeTabs;
 import net.dielauxx.wandandspellsmod.item.ModItems;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,8 +34,8 @@ public class WandAndSpellsMod
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModCreativeModeTabs.register(modEventBus);
-
         ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -51,7 +54,7 @@ public class WandAndSpellsMod
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if(event.getTabKey() == CreativeModeTabs.COMBAT) {
-            event.accept(ModItems.SPARK_BOLT);
+            event.accept(ModItems.SPARK_BOLT_SPELL);
             event.accept(ModItems.WAND);
         }
     }
@@ -69,6 +72,7 @@ public class WandAndSpellsMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            EntityRenderers.register(ModEntities.SPARK_BOLT.get(), SparkBoltRenderer::new);
         }
     }
 }

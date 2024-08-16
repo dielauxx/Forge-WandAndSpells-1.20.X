@@ -15,10 +15,10 @@ public class ModCreativeModeTabs {
 
     public static final RegistryObject<CreativeModeTab> WAND_AND_SPELLS_TAB = CREATIVE_MODE_TABS.register("wand_and_spells_tab",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModItems.SPARK_BOLT.get()))
+                    .icon(() -> new ItemStack(ModItems.SPARK_BOLT_SPELL.get()))
                     .title(Component.translatable("creativetab.wand_and_spells_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModItems.SPARK_BOLT.get());
+                        output.accept(ModItems.SPARK_BOLT_SPELL.get());
                         output.accept(ModItems.WAND.get());
                     })
                     .build());
